@@ -100,15 +100,17 @@ app.put('/api/movies/:id', async (req, res) => {
 });
 
 // DELETE /api/movies/:id - Eliminar filme
-app.delete('/api/movies/:id', (req, res) => {
-  let movies = lerDaBD();
-  const index = movies.findIndex(m => m.id === parseInt(req.params.id));
-  if (index === -1) return res.status(404).json({ erro: 'Filme não encontrado' });
-  movies.splice(index, 1);
-  guardarNaBD(movies);
-  res.json({ mensagem: 'Filme eliminado com sucesso' });
-});
+app.delete('/api/movies/:id', async (req, res) => {
+  try {
+    const movie = await Movie.findByIdAndDelete(req.params.id);
 
+    if (!movie) return res.status(404).json({ erro: 'Filme não encontrado.' });
+    res.json({ mensagem: 'Filme eliminado com sucesso.' });
+  } catch (error) {
+    console.error('Erro ao eliminar produto:', error);
+    res.status(500).json({ erro: 'Erro interno do servidor.' });
+  }
+});
 
 // ===== INICIALIZAÇÃO DO SERVIDOR (também não se deve mexer)=====
 

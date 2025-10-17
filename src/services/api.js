@@ -19,21 +19,59 @@ export async function buscarFilmesAPI() {
   }
 }
 
-// Buscar filme por ID
-export async function buscarFilmePorIdAPI(id) {
+// Obter lista de classificação
+export async function buscarClassificacaoFilmesAPI() {
   try {
-    const response = await fetch(`/api/movies/${id}`)
+    const response = await fetch('/api/movies?sortBy=rating&order=desc')
 
     if (!response.ok) {
       console.error('Erro na resposta:', response.status, response.statusText)
-      throw new Error('Erro ao carregar filme.')
+      throw new Error('Erro ao carregar filmes.')
     }
 
     const data = await response.json()
     return data
 
   } catch (error) {
-    console.error('Erro ao carregar filme.', error)
+    console.error('Erro ao carregar filmes.', error)
+    throw error
+  }
+}
+
+// Obter lista de filmes vistos
+export async function buscarFilmesVistosAPI() {
+  try {
+    const response = await fetch('/api/movies?watched=true')
+
+    if (!response.ok) {
+      console.error('Erro na resposta:', response.status, response.statusText)
+      throw new Error('Erro ao carregar filmes.')
+    }
+
+    const data = await response.json()
+    return data
+
+  } catch (error) {
+    console.error('Erro ao carregar filmes.', error)
+    throw error
+  }
+}
+
+// Obter lista de filmes não vistos
+export async function buscarFilmesNaoVistosAPI() {
+  try {
+    const response = await fetch('/api/movies?watched=false')
+
+    if (!response.ok) {
+      console.error('Erro na resposta:', response.status, response.statusText)
+      throw new Error('Erro ao carregar filmes.')
+    }
+
+    const data = await response.json()
+    return data
+
+  } catch (error) {
+    console.error('Erro ao carregar filmes.', error)
     throw error
   }
 }
@@ -100,7 +138,8 @@ export async function eliminarFilmeAPI(id) {
       throw new Error('Erro ao eliminar filme.')
     }
 
-    return true
+    const data = await response.json()
+    return data
 
   } catch (error) {
     console.error('Erro ao eliminar filme.', error)
