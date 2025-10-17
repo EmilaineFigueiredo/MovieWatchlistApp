@@ -11,45 +11,103 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Esta constante é relativa às coleções da tua base de dados e deves acrescentar mais se for o caso
-const Nome = require('./models/Nome');
-
-
+// Esta constante é relativa às coleções da base de dados
+const Movie = require('./models/Movie');
 
 // ===== ENDPOINTS DA API =====
 
-// GET /api/nomes - Retorna todos os nomes existentes
-app.get('/api/nomes', async (req, res) => {
+// GET /api/movies - Obter lista de todos os filmes
+app.get('/api/movies', async (req, res) => {
   try {
-    const nomes = await Nome.find().sort({ nome: 1 });
-    res.json(nomes);
+    const movies = await Movie.find();
+    res.json(movies);
   } catch (error) {
-    console.error('Erro ao carregar nomes:', error);
+    console.error('Erro ao carregar filmes:', error);
     res.status(500).json({ erro: 'Erro interno do servidor' });
   }
 });
 
-// POST /api/nomes - Adiciona um novo nome à coleção "nomes"
-app.post('/api/nomes', async (req, res) => {
+// GET /api/movies - Obter lista de classificação
+app.get('/api/movies?sortBy=rating&order=desc', async (req, res) => {
   try {
-    const { nome } = req.body;
-    
-    if (!nome || !nome.trim()) {
-      return res.status(400).json({ erro: 'Nome é obrigatório' });
+    const movies = await Movie.find().sort({ rating: -1 });
+    res.json(movies);
+  } catch (error) {
+    console.error('Erro ao carregar filmes:', error);
+    res.status(500).json({ erro: 'Erro interno do servidor' });
+  }
+});
+
+// GET /api/movies - Obter lista de filmes vistos
+app.get('/api/movies?watched=true', async (req, res) => {
+  try {
+    const movies = await Movie.find({ watched: true });
+    res.json(movies);
+  } catch (error) {
+    console.error('Erro ao carregar filmes:', error);
+    res.status(500).json({ erro: 'Erro interno do servidor' });
+  }
+});
+
+// GET /api/movies - Obter lista de filmes não vistos
+app.get('/api/movies?watched=false', async (req, res) => {
+  try {
+    const movies = await Movie.find({ watched: false });
+    res.json(movies);
+  } catch (error) {
+    console.error('Erro ao carregar filmes:', error);
+    res.status(500).json({ erro: 'Erro interno do servidor' });
+  }
+});
+
+
+// POST /api/movies - Adicionar novo filme
+app.post('/api/movies', async (req, res) => {
+  try {
+    const { title, year, genre, watched, rating } = req.body;
+
+    if (!title || !title.trim()) {
+      return res.status(400).json({ erro: 'Inserir um título é obrigatório' });
     }
 
-    const novoNome = new Nome({ nome: nome.trim() });
-    const nomeSalvo = await novoNome.save();
-    res.status(201).json(nomeSalvo);
+    const novoMovie = new Movie({ title: title.trim(), year, genre, watched, rating });
+    const movieSalvo = await novoMovie.save();
+    res.status(201).json(movieSalvo);
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(400).json({ erro: 'Este nome já existe' });
+      return res.status(400).json({ erro: 'Este filme já existe' });
     }
-    console.error('Erro ao criar nome:', error);
+    console.error('Erro ao criar filme:', error);
     res.status(500).json({ erro: 'Erro interno do servidor' });
   }
 });
 
+// PUT /api/movies/:id - Editar filme existente
+app.put('/api/movies/:id', async (req, res) => {
+  try {
+    const movies = await Movie.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }  // Retorna documento atualizado e executa validações
+    );
+
+    if (!movies) return res.status(404).json({ erro: 'Filme não encontrado.' });
+    res.json(movies);
+  } catch (error) {
+    console.error('Erro ao atualizar filme.', error);
+    res.status(500).json({ erro: 'Erro interno do servidor.' });
+  }
+});
+
+// DELETE /api/movies/:id - Eliminar filme
+app.delete('/api/movies/:id', (req, res) => {
+  let movies = lerDaBD();
+  const index = movies.findIndex(m => m.id === parseInt(req.params.id));
+  if (index === -1) return res.status(404).json({ erro: 'Filme não encontrado' });
+  movies.splice(index, 1);
+  guardarNaBD(movies);
+  res.json({ mensagem: 'Filme eliminado com sucesso' });
+});
 
 
 // ===== INICIALIZAÇÃO DO SERVIDOR (também não se deve mexer)=====
