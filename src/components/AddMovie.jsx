@@ -32,7 +32,7 @@ export default function AddMovie() {
           placeholder="Filme"
           className="flex-1 border border-gray-300 ps-3 py-2 rounded"
         />
-        <button type="submit" disabled={!novoFilme} className="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600">
+        <button type="submit" disabled={!novoFilme} className="bg-green-600 text-white p-2 rounded">
           Adicionar
         </button>
       </form>
