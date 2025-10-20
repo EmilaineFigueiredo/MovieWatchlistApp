@@ -18,7 +18,7 @@ export default function VerFilmes() {
     setFilmeSelecionado(null);
   }
 
-  // Buscar os filmes
+  // Buscar filmes
   async function buscarFilmes() {
     try {
       const data = await buscarFilmesAPI();
