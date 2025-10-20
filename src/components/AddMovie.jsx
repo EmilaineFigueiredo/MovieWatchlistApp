@@ -24,8 +24,8 @@ export default function AddMovie({ onClose, onSuccess }) {
     try {
       await adicionarFilmeAPI(novoFilme);
       alert('Filme adicionado com sucesso!');
-      onSuccess?.(); // callback opcional
-      onClose?.();   // fecha modal se função passada
+      onSuccess?.();
+      onClose?.();
       setNovoFilme({
         title: '',
         year: '',
@@ -109,15 +109,15 @@ export default function AddMovie({ onClose, onSuccess }) {
           <button
             type="button"
             onClick={onClose}
-            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
             Adicionar
+          </button>
+          <button
+            type="submit"
+            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+          >
+            Cancelar
           </button>
         </div>
       </form>

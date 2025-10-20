@@ -6,7 +6,17 @@ import EditMovie from './EditMovie';
 export default function VerFilmes() {
   const [filmes, setFilmes] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [filmeSelecionado, setFilmeSelecionado] = useState(null);
 
+  function abrirModalEdicao(filme) {
+    setFilmeSelecionado(filme);
+    setShowEditModal(true);
+  }
+
+  function fecharModalEdicao() {
+    setShowEditModal(false);
+    setFilmeSelecionado(null);
+  }
 
   // Buscar os filmes
   async function buscarFilmes() {
@@ -17,30 +27,6 @@ export default function VerFilmes() {
       console.error('Erro ao carregar filmes.', error);
     }
   }
-
-  // Editar um filme
-
-  {/* MODAL PARA EDITAR FILME */ }
-  {
-    showEditModal && (
-      <div className="fixed inset-0 bg-gray-300 bg-opacity-50 flex justify-center items-center z-50">
-        <div className="bg-white text-black p-6 rounded-md w-full max-w-md relative">
-          <button
-            onClick={() => setShowEditModal(false)}
-            className="absolute top-2 right-2 text-gray-600"
-          >
-            ✖
-          </button>
-          <EditMovie />
-        </div>
-      </div>
-    )
-  }
-
-
-
-
-
 
   // Eliminar um filme
   async function eliminarFilmeAPI(id) {
@@ -84,7 +70,8 @@ export default function VerFilmes() {
           <div className="flex gap-2">
             <button
               className="bg-yellow-500 text-white text-sm px-2 py-1 rounded"
-              onClick={() => atualizarFilmeAPI(item._id)}
+              onClick={() => abrirModalEdicao(item)}
+
             >
               Editar
             </button>
@@ -97,6 +84,21 @@ export default function VerFilmes() {
           </div>
         </div>
       ))}
+
+      {/* MODAL PARA EDITAR FILME */}
+      {
+        showEditModal && (
+          <EditMovie
+            isOpen={showEditModal}
+            onClose={fecharModalEdicao}
+            onSuccess={() => {
+              buscarFilmes();
+              fecharModalEdicao();
+            }}
+            filme={filmeSelecionado}
+          />
+        )
+      }
     </div>
   );
 }

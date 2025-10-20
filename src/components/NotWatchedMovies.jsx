@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
 import { buscarFilmesNaoVistosAPI } from '@/services/api'
 
-export default function NotWatchedMovies({ isOpen, onClose }) {
+export default function NotWatchedMovies() {
   const [filmes, setFilmes] = useState([])
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    if (isOpen) {
-      buscarFilmes()
-    }
-  }, [isOpen])
+    buscarFilmes()
+
+  }, [])
 
   async function buscarFilmes() {
     try {
@@ -22,20 +21,11 @@ export default function NotWatchedMovies({ isOpen, onClose }) {
     }
   }
 
-  function handleClose() {
-    onClose()
-    setFilmes([])
-    setError(null)
-  }
-
-  if (!isOpen) return null
-
   return (
-    <div className="fixed inset-0 bg-gray-300 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200">
+    <div className="">
+      <div className="">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Filmes Não Vistos</h2>
-          <button onClick={handleClose} className="text-gray-400 hover:text-gray-600 text-2xl">✕</button>
+          <h2 className="text-2xl font-bold text-black">Filmes Não Vistos</h2>
         </div>
 
         {error && <p className="text-red-600">{error}</p>}
@@ -44,7 +34,7 @@ export default function NotWatchedMovies({ isOpen, onClose }) {
         {!error && filmes.length > 0 && (
           <ul className="space-y-3">
             {filmes.map(filme => (
-              <li key={filme.id} className="border border-gray-300 rounded-md p-3">
+              <li key={filme.id} className="border border-white rounded-md p-3">
                 <div className="flex justify-between">
                   <span className="font-semibold">{filme.title} ({filme.year})</span>
                   <span className="text-green-700 font-bold">{filme.rating}</span>

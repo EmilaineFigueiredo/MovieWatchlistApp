@@ -26,7 +26,7 @@ export default function EditMovie({ isOpen, onClose, onSuccess, filme }) {
     e.preventDefault()
 
     try {
-      await atualizarFilmeAPI(filme.id, formData)
+      await atualizarFilmeAPI(filme._id, formData)
       alert('Filme atualizado com sucesso!')
       onSuccess()
       onClose()
@@ -126,16 +126,18 @@ export default function EditMovie({ isOpen, onClose, onSuccess, filme }) {
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
             />
           </div>
-          <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex-1">
-            Atualizar
-          </button>
-          <button
-            type="button"
-            onClick={handleClose}
-            className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 flex-1"
-          >
-            Cancelar
-          </button>
+          <div className="flex justify-end gap-2">
+            <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex-1">
+              Atualizar
+            </button>
+            <button
+              type="button"
+              onClick={handleClose}
+              className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 flex-1"
+            >
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </div>
