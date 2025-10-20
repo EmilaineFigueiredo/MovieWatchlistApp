@@ -28,7 +28,7 @@ app.get('/api/movies', async (req, res) => {
 });
 
 // GET /api/movies - Obter lista de classificação
-app.get('/api/movies?sortBy=rating&order=desc', async (req, res) => {
+app.get('/api/movies/rating', async (req, res) => {
   try {
     const movies = await Movie.find().sort({ rating: -1 });
     res.json(movies);
@@ -39,7 +39,7 @@ app.get('/api/movies?sortBy=rating&order=desc', async (req, res) => {
 });
 
 // GET /api/movies - Obter lista de filmes vistos
-app.get('/api/movies?watched=true', async (req, res) => {
+app.get('/api/movies/watched', async (req, res) => {
   try {
     const movies = await Movie.find({ watched: true });
     res.json(movies);
@@ -50,7 +50,7 @@ app.get('/api/movies?watched=true', async (req, res) => {
 });
 
 // GET /api/movies - Obter lista de filmes não vistos
-app.get('/api/movies?watched=false', async (req, res) => {
+app.get('/api/movies/nowatched', async (req, res) => {
   try {
     const movies = await Movie.find({ watched: false });
     res.json(movies);

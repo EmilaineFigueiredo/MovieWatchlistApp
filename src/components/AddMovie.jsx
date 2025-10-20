@@ -2,7 +2,13 @@ import { useState } from 'react';
 import { adicionarFilmeAPI } from '../services/api';
 
 export default function adicionarFilmeAPI() {
-  const [novoFilme, setNovoFilme] = useState('');
+  const [novoFilme, setNovoFilme] = useState({
+    title: '',
+    year: '',
+    genre: '',
+    watched: '',
+    rating: ''
+  })
 
   async function adicionarFilme() {
     if (!novoFilme) return;

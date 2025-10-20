@@ -22,7 +22,7 @@ export async function buscarFilmesAPI() {
 // Obter lista de classificação
 export async function buscarClassificacaoFilmesAPI() {
   try {
-    const response = await fetch('/api/movies?sortBy=rating&order=desc')
+    const response = await fetch('/api/movies/rating')
 
     if (!response.ok) {
       console.error('Erro na resposta:', response.status, response.statusText)
@@ -41,7 +41,7 @@ export async function buscarClassificacaoFilmesAPI() {
 // Obter lista de filmes vistos
 export async function buscarFilmesVistosAPI() {
   try {
-    const response = await fetch('/api/movies?watched=true')
+    const response = await fetch('/api/movies/watched')
 
     if (!response.ok) {
       console.error('Erro na resposta:', response.status, response.statusText)
@@ -60,7 +60,7 @@ export async function buscarFilmesVistosAPI() {
 // Obter lista de filmes não vistos
 export async function buscarFilmesNaoVistosAPI() {
   try {
-    const response = await fetch('/api/movies?watched=false')
+    const response = await fetch('/api/movies/nowatched')
 
     if (!response.ok) {
       console.error('Erro na resposta:', response.status, response.statusText)
