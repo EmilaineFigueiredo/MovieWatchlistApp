@@ -39,9 +39,6 @@ export default function VerFilmes() {
   }, []);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 min-w-72 h-fit">
-      <h2 className="text-1xl font-semibold mb-3">lista de filmes</h2>
-
       <div>
         {filmes.map((item) => (
           <div key={item._id} className="flex justify-between items-center mb-2">
@@ -55,6 +52,5 @@ export default function VerFilmes() {
           </div>
         ))}
       </div>
-    </div>
   );
 }

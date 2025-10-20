@@ -5,11 +5,13 @@ import { MdOutlineEdit } from "react-icons/md";
 import { GrView } from "react-icons/gr";
 import { GrFormViewHide } from "react-icons/gr";
 import { AiOutlineOrderedList } from "react-icons/ai";
+import EditMovie from '@/components/EditMovie';
 
 export default function Home() {
+
   return (
-    <div className="min-h-screen bg-gradient-to-r from-pink-500 to-purple-400 text-white p-6 flex flex-col gap-6">
-      <h1 className="text-5xl font-white text-center mb-6">All Movies</h1>
+    <div className="min-h-screen bg-gradient-to-r from-blue-800 to-purple-400 text-white p-6 flex flex-col gap-6">
+      <h1 className="text-6xl font-white text-center mb-6">ALL MOVIES</h1>
       <AllMovies />
 
       <div className="flex flex-wrap gap-4 justify-center">

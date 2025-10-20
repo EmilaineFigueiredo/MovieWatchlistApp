@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { adicionarFilmeAPI } from '../services/api';
 
-export default function adicionarFilmeAPI() {
+export default function AddMovie() {
   const [novoFilme, setNovoFilme] = useState({
     title: '',
     year: '',
