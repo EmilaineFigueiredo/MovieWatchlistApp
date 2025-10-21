@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-200 p-6 flex flex-col gap-6">
-      <h1 className="text-5xl text-gray-700 font-white text-center mb-6">ALL MOVIES</h1>
+      <h1 className="text-6xl text-gray-700 font-white text-center mb-6">ALL MOVIES</h1>
 
 
       {/* MODAL PARA ADICIONAR FILME */}
@@ -53,34 +53,34 @@ export default function Home() {
       <div className="flex flex-col items-center gap-4">
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-blue-700 text-white font-light py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
+          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
         >
           + Adicionar novo filme
         </button>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
           <button
             onClick={() => setSelectedComponent('allMovies')}
-            className="bg-gray-600 text-white font-light py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
+            className="bg-white text-gray-700 font-light py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
           >
             Todos os Filmes
           </button>
           <button
             onClick={() => setSelectedComponent('watched')}
-            className="bg-green-500 text-white font-light py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
+            className="bg-white text-gray-700 font-light py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
           >
             Filmes já vistos
           </button>
 
           <button
             onClick={() => setSelectedComponent('notWatched')}
-            className="bg-green-500 text-white font-light py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
+            className="bg-white text-gray-700 font-light py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
           >
             Filmes não vistos
           </button>
 
           <button
             onClick={() => setSelectedComponent('byRating')}
-            className="bg-green-500 text-white font-light py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
+            className="bg-white text-gray-700 font-light py-2 px-5 rounded-lg transition-colors flex items-center gap-2"
           >
             Ordenar por classificação
           </button>

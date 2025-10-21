@@ -69,7 +69,7 @@ export default function VerFilmes() {
 
           <div className="flex gap-2">
             <button
-              className="bg-yellow-500 text-white text-sm px-2 py-1 rounded"
+              className="bg-blue-600 text-white text-sm px-2 py-1 rounded"
               onClick={() => abrirModalEdicao(item)}
 
             >

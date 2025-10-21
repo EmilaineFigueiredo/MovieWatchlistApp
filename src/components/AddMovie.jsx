@@ -20,7 +20,6 @@ export default function AddMovie({ onClose, onSuccess }) {
 
   async function adicionarFilme(e) {
     e.preventDefault();
-
     try {
       await adicionarFilmeAPI(novoFilme);
       alert('Filme adicionado com sucesso!');

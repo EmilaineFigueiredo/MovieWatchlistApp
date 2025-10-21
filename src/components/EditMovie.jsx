@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { atualizarFilmeAPI } from '@/services/api'
 
 export default function EditMovie({ isOpen, onClose, onSuccess, filme }) {
+
   const [formData, setFormData] = useState({
     title: '',
     year: '',
